@@ -10,6 +10,19 @@ El flujo es:
 4. Guardar un indice vectorial local.
 5. Hacer preguntas, recuperar noticias relevantes y construir el prompt RAG.
 
+## Clonar el repositorio
+
+Clona el repositorio del curso en tu PC y entra en la carpeta de este ejemplo:
+
+```bash
+git clone <URL-del-repositorio>
+cd "ML Maestria/Embeddings/rag_basico"
+```
+
+Reemplaza `<URL-del-repositorio>` por la URL real del repo (por ejemplo
+`https://github.com/usuario/ML-Maestria.git`). Si ya tienes el repositorio
+clonado, solo entra en la carpeta `Embeddings/rag_basico`.
+
 ## Instalacion
 
 Desde esta carpeta:
@@ -95,6 +108,24 @@ le enviaria a un LLM (Claude, GPT, etc.) para redactar la respuesta final. No
 llama a ningun modelo ni requiere API key. Como ilustracion del mecanismo,
 tambien muestra una respuesta "extractiva" armada con frases del contexto.
 
+## Ver los chunks de una noticia
+
+```bash
+python scripts/show_chunks.py --list          # lista noticias y su nro de chunks
+python scripts/show_chunks.py --index 0       # chunks de una noticia
+python scripts/show_chunks.py --search inteligencia
+```
+
+Muestra el texto de la noticia y en qué chunks se divide antes de indexarse,
+resaltando la zona de solapamiento entre chunks consecutivos.
+
+Con el corpus RSS las noticias son cortas y suelen dar un unico chunk. Para ver
+la division y el solapamiento en accion, bajá el tamaño de chunk:
+
+```bash
+python scripts/show_chunks.py --index 0 --max-chars 200 --overlap 40
+```
+
 ## Estructura
 
 ```text
@@ -110,6 +141,7 @@ rag_basico/
     query_rag.py            # hace consultas al RAG
     demo_queries.py         # consultas predefinidas
     generate_answer.py      # muestra paso a paso como se genera la respuesta
+    show_chunks.py          # muestra en que chunks se divide una noticia
   src/
     rag_core.py             # funciones compartidas
 ```
